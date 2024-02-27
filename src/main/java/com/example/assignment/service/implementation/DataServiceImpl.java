@@ -13,11 +13,11 @@ import java.util.concurrent.ExecutionException;
 @Service
 public class DataServiceImpl implements DataService {
 
-//    @Value("${jsonplaceholder.users.url}")
-//    private String usersUrl;
-//
-//    @Value("${jsonplaceholder.posts.url}")
-//    private String postsUrl;
+    @Value("${jsonplaceholder.users.url}")
+    private String usersUrl;
+
+    @Value("${jsonplaceholder.posts.url}")
+    private String postsUrl;
 
     private final RestTemplate restTemplate;
 
@@ -35,10 +35,10 @@ public class DataServiceImpl implements DataService {
     }
 
     private CompletableFuture<String> fetchUserData() {
-        return CompletableFuture.supplyAsync(() -> restTemplate.getForObject("https://jsonplaceholder.org/users", String.class));
+        return CompletableFuture.supplyAsync(() -> restTemplate.getForObject(usersUrl, String.class));
     }
 
     private CompletableFuture<String> fetchPostData() {
-        return CompletableFuture.supplyAsync(() -> restTemplate.getForObject("https://jsonplaceholder.org/posts/", String.class));
+        return CompletableFuture.supplyAsync(() -> restTemplate.getForObject(postsUrl, String.class));
     }
 }
